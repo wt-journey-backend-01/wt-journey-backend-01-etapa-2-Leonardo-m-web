@@ -37,6 +37,11 @@ const createCase = (req, res, next) =>{
     try{
         const { titulo, descricao, status, agente_id} = req.body;
 
+        const agenteExiste = agentesRepository.findAById(agente_id);
+        if (!agenteExiste) {
+            return next(new ApiError('Agente não encontrado para o agente_id informado', 404));
+        }
+
         const newData = {
             titulo,
             descricao,
@@ -67,7 +72,7 @@ const putCase = (req, res, next) =>{
         res.status(200).json(update);
 
     }catch(error){
-        next(new ApiError(error.massage, 400));
+        next(new ApiError(error.message, 400));
     };
 };
 

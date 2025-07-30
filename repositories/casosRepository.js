@@ -21,7 +21,8 @@ const putC = (id, dados) =>{
     const index = casos.findIndex((a) => a.id ===id);
 
     if(index != -1){
-        casos[index] = { ...casos[index], ...dados};
+        const { id: _, ...dadosSemId } = dados;
+        casos[index] = { ...casos[index], ...dadosSemId};
         return casos[index];
     };
     return null;

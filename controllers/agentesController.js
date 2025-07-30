@@ -66,7 +66,7 @@ const putAgent = (req, res, next) =>{
         res.status(200).json(update);
 
     }catch(error){
-        next(new ApiError(error.massage, 400));
+        next(new ApiError(error.message, 400));
     };
 };
 

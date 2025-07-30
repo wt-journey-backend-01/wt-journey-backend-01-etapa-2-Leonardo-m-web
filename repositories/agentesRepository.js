@@ -23,7 +23,7 @@ const agentes = [
 
 const findA = () => agentes;
 
-const findAById = (id) => animais.find((a) => a.id === id);
+const findAById = (id) => agentes.find((a) => a.id === id);
 
 const createA = (dados) =>{
     const novoAgente = {
@@ -38,7 +38,8 @@ const putA = (id, dados) =>{
     const index = agentes.findIndex((a) => a.id === id);
 
     if(index != -1){
-        agentes[index] = { ...agentes[index], ...dados};
+        const { id: _, ...dadosSemId } = dados;
+        agentes[index] = { ...agentes[index], ...dadosSemId};
         return agentes[index];
     };
 
