@@ -26,6 +26,10 @@ const getCaseById = (req, res, next) =>{
         const { id } = req.params;
         const caso = repositories.findCById(id);
 
+        if(!caso){
+            return next(new ApiError('Caso não encontrado', 404));
+        }
+
         res.status(200).json(caso);
 
     }catch(error){
@@ -80,7 +84,9 @@ const putCase = (req, res, next) =>{
 const patchCase = (req, res, next) =>{
     const { id } = req.params;
     try{
-        const data = casoSchema.parse(req.body);
+
+        const casePatchSchema = casoSchema.partial();
+        const data = casePatchSchema.parse(req.body); 
         const update = repositories.patchC(id, data);
 
         if(!update){

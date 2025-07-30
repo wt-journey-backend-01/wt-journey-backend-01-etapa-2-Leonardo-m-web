@@ -25,6 +25,10 @@ const getAgentById = (req, res, next) =>{
         const { id } = req.params;
         const agente = repositories.findAById(id);
 
+        if(!agente){
+            return next(new ApiError('Agente não encontrado', 404));
+        }
+
         res.status(200).json(agente);
 
     }catch(error){
@@ -73,7 +77,8 @@ const putAgent = (req, res, next) =>{
 const patchAgent = (req, res, next) =>{
     const { id } = req.params;
     try{
-        const data = agentSchema.parse(req.body);
+        const agentPatchSchema = agentSchema.partial();
+        const data = agentPatchSchema.parse(req.body);
         const update = repositories.patchA(id, data);
 
         if(!update){
