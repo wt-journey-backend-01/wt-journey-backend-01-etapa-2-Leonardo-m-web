@@ -26,7 +26,7 @@ const findA = () => agentes;
 const findAById = (id) => agentes.find((a) => a.id === id);
 
 const createA = (dados) =>{
-    const novoAgente = {
+    let novoAgente = {
         id: uuidv4(),
         ...dados
     }
@@ -35,10 +35,10 @@ const createA = (dados) =>{
 };
 
 const putA = (id, dados) =>{
-    const index = agentes.findIndex((a) => a.id === id);
+    let index = agentes.findIndex((a) => a.id === id);
 
     if(index != -1){
-        const { id: _, ...dadosSemId } = dados;
+        let { id: _, ...dadosSemId } = dados;
         agentes[index] = { ...agentes[index], ...dadosSemId};
         return agentes[index];
     };
@@ -47,10 +47,10 @@ const putA = (id, dados) =>{
 };
 
 const patchA = (id, dados) =>{
-    const index = agentes.findIndex((a) => a.id === id);
+    let index = agentes.findIndex((a) => a.id === id);
 
     if(index != -1){
-        const { id: _, ...dadosSemId } = dados;
+        let { id: _, ...dadosSemId } = dados;
         agentes[index] = { ...agentes[index], ...dadosSemId};
         return agentes[index];
     };
@@ -59,7 +59,7 @@ const patchA = (id, dados) =>{
 };
 
 const removeA = (id) =>{
-    const index = agentes.findIndex((a) => a.id === id);
+    let index = agentes.findIndex((a) => a.id === id);
 
     if(index != -1){
         agentes.splice(index, 1);

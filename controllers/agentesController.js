@@ -34,8 +34,8 @@ const getAgents = (req, res, next) =>{
 
 const getAgentById = (req, res, next) =>{
     try{
-        const { id } = req.params;
-        const agente = repositories.findAById(id);
+        let { id } = req.params;
+        let agente = repositories.findAById(id);
 
         if(!agente){
             return next(new ApiError('Agente não encontrado', 404));
@@ -51,15 +51,15 @@ const getAgentById = (req, res, next) =>{
 const createAgent = (req, res, next) =>{
     
     try{
-        const { nome, dataDeIncorporacao, cargo} = req.body;
+        let { nome, dataDeIncorporacao, cargo} = req.body;
 
-        const newData = {
+        let newData = {
             nome,
             dataDeIncorporacao,
             cargo :  cargo ? cargo.toLowerCase() : cargo
         };
-        const data = agentSchema.parse(newData);
-        const newAgent = repositories.createA(data);
+        let data = agentSchema.parse(newData);
+        let newAgent = repositories.createA(data);
 
         res.status(201).json(newAgent);
 
@@ -69,11 +69,11 @@ const createAgent = (req, res, next) =>{
 };
 
 const putAgent = (req, res, next) =>{
-    const {id} = req.params;
+    let {id} = req.params;
 
     try{
-        const data = agentSchema.parse(req.body);
-        const update = repositories.putA(id, data);
+        let data = agentSchema.parse(req.body);
+        let update = repositories.putA(id, data);
 
         if(!update){
             return next(new ApiError('Agente não encontrado', 404))
@@ -87,11 +87,11 @@ const putAgent = (req, res, next) =>{
 };
 
 const patchAgent = (req, res, next) =>{
-    const { id } = req.params;
+    let { id } = req.params;
     try{
-        const agentPatchSchema = agentSchema.partial();
-        const data = agentPatchSchema.parse(req.body);
-        const update = repositories.patchA(id, data);
+        let agentPatchSchema = agentSchema.partial();
+        let data = agentPatchSchema.parse(req.body);
+        let update = repositories.patchA(id, data);
 
         if(!update){
             return next(new ApiError('Agente não encontrado', 404))
@@ -105,10 +105,10 @@ const patchAgent = (req, res, next) =>{
 };
 
 const deleteAgent = (req, res, next) =>{
-    const { id } = req.params;
+    let { id } = req.params;
 
     try{
-        const deleted = repositories.removeA(id);
+        let deleted = repositories.removeA(id);
         
         if(!deleted){
             return next(new ApiError('Agente não encontrado', 404))

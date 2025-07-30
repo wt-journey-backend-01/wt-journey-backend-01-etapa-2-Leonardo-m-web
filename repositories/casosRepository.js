@@ -9,7 +9,7 @@ const findC = () => casos;
 const findCById = (id) => casos.find((a) => a.id === id);
 
 const createC = ( dados) =>{
-    const novoCaso ={
+    let novoCaso ={
         id: uuidv4(),
         ...dados
     };
@@ -18,10 +18,10 @@ const createC = ( dados) =>{
 }
 
 const putC = (id, dados) =>{
-    const index = casos.findIndex((a) => a.id ===id);
+    let index = casos.findIndex((a) => a.id ===id);
 
     if(index != -1){
-        const { id: _, ...dadosSemId } = dados;
+        let { id: _, ...dadosSemId } = dados;
         casos[index] = { ...casos[index], ...dadosSemId};
         return casos[index];
     };
@@ -29,10 +29,10 @@ const putC = (id, dados) =>{
 };
 
 const patchC = (id, dados) =>{
-    const index = casos.findIndex((a) => a.id ===id);
+    let index = casos.findIndex((a) => a.id ===id);
 
     if(index != -1){
-        const { id: _, ...dadosSemId } = dados;
+        let { id: _, ...dadosSemId } = dados;
         casos[index] = { ...casos[index], ...dadosSemId};
         return casos[index];
     };
@@ -41,7 +41,7 @@ const patchC = (id, dados) =>{
 };
 
 const removeC = (id) =>{
-    const index = casos.findIndex((a) => a.id ===id);
+    let index = casos.findIndex((a) => a.id ===id);
 
     if(index != -1){
         casos.splice(index, 1);

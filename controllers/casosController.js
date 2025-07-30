@@ -12,14 +12,14 @@ class ApiError extends Error{
 
 const getCase = (req, res, next) =>{
     try{
-        const casos = repositories.findC();
+        let casos = repositories.findC();
 
-        const { status } = req.query;
+        let { status } = req.query;
 
         if (status) {
             casos = casos.filter(c => c.status === status.toLowerCase());
         }
-        
+
         res.status(200).json(casos);
 
     }catch(error){
@@ -29,8 +29,8 @@ const getCase = (req, res, next) =>{
 
 const getCaseById = (req, res, next) =>{
     try{
-        const { id } = req.params;
-        const caso = repositories.findCById(id);
+        let { id } = req.params;
+        let caso = repositories.findCById(id);
 
         if(!caso){
             return next(new ApiError('Caso não encontrado', 404));
@@ -46,21 +46,21 @@ const getCaseById = (req, res, next) =>{
 const createCase = (req, res, next) =>{
     
     try{
-        const { titulo, descricao, status, agente_id} = req.body;
+        let { titulo, descricao, status, agente_id} = req.body;
 
-        const agenteExiste = agentesRepository.findAById(agente_id);
+        let agenteExiste = agentesRepository.findAById(agente_id);
         if (!agenteExiste) {
             return next(new ApiError('Agente não encontrado para o agente_id informado', 404));
         }
 
-        const newData = {
+        let newData = {
             titulo,
             descricao,
             status:  status ? status.toLowerCase() : status,
             agente_id
         };
-        const data = casoSchema.parse(newData);
-        const newCase = repositories.createC(data);
+        let data = casoSchema.parse(newData);
+        let newCase = repositories.createC(data);
 
         res.status(201).json(newCase);
 
@@ -70,11 +70,11 @@ const createCase = (req, res, next) =>{
 };
 
 const putCase = (req, res, next) =>{
-    const {id} = req.params;
+    let {id} = req.params;
 
     try{
-        const data = casoSchema.parse(req.body);
-        const update = repositories.putC(id, data);
+        let data = casoSchema.parse(req.body);
+        let update = repositories.putC(id, data);
 
         if(!update){
             return next(new ApiError('Caso não encontrado', 404))
@@ -88,12 +88,12 @@ const putCase = (req, res, next) =>{
 };
 
 const patchCase = (req, res, next) =>{
-    const { id } = req.params;
+    let { id } = req.params;
     try{
 
-        const casePatchSchema = casoSchema.partial();
-        const data = casePatchSchema.parse(req.body); 
-        const update = repositories.patchC(id, data);
+        let casePatchSchema = casoSchema.partial();
+        let data = casePatchSchema.parse(req.body); 
+        let update = repositories.patchC(id, data);
 
         if(!update){
             return next(new ApiError('Caso não encontrado', 404))
@@ -107,10 +107,10 @@ const patchCase = (req, res, next) =>{
 };
 
 const deleteCase = (req, res, next) =>{
-    const { id } = req.params;
+    let { id } = req.params;
 
     try{
-        const deleted = repositories.removeC(id);
+        let deleted = repositories.removeC(id);
         
         if(!deleted){
             return next(new ApiError('Caso não encontrado', 404))
