@@ -1,4 +1,5 @@
 const repositories = require('../repositories/casosRepository');
+const agentesRepository = require('../repositories/agentesRepository');
 const { casoSchema } = require('../utils/casosValidation');
 
 class ApiError extends Error{

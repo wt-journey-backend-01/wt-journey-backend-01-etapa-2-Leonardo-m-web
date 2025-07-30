@@ -28,7 +28,7 @@ const getAgentById = (req, res, next) =>{
         res.status(200).json(agente);
 
     }catch(error){
-        next(new ApiError('Erro ao listar animais'));
+        next(new ApiError('Erro ao encontrar agente'));
     };
 };
 
