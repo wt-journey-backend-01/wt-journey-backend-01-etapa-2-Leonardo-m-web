@@ -21,8 +21,8 @@ const putC = (id, dados) =>{
     const index = casos.findIndex((a) => a.id ===id);
 
     if(index != -1){
-        casos(index) = { ...casos(index), ...dados};
-        return casos(index);
+        casos[index] = { ...casos[index], ...dados};
+        return casos[index];
     };
     return null;
 };
@@ -31,8 +31,8 @@ const patchC = (id, dados) =>{
     const index = casos.findIndex((a) => a.id ===id);
 
     if(index != -1){
-        casos(index) = { ...casos(index), ...dados};
-        return casos(index);
+        casos[index] = { ...casos[index], ...dados};
+        return casos[index];
     };
 
     return null;
@@ -42,7 +42,7 @@ const removeC = (id) =>{
     const index = casos.findIndex((a) => a.id ===id);
 
     if(index != -1){
-        casos(index).splice(index, 1);
+        casos.splice(index, 1);
         return true;
     };
 

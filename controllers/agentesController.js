@@ -25,7 +25,7 @@ const getAgentById = (req, res, next) =>{
         const { id } = req.params;
         const agente = repositories.findAById(id);
 
-        res.status(200).jsn(agente);
+        res.status(200).json(agente);
 
     }catch(error){
         next(new ApiError('Erro ao listar animais'));
@@ -40,7 +40,7 @@ const createAgent = (req, res, next) =>{
         const newData = {
             nome,
             dataDeIncorporacao,
-            cargo : cargo.ToLowerCase()
+            cargo : cargo.toLowerCase()
         };
         const data = agentSchema.parse(newData);
         const newAgent = repositories.createA(data);

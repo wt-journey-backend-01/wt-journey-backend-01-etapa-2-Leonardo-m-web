@@ -4,19 +4,19 @@ const agentes = [
     {
         id: uuidv4(),
         nome : "Geraldo da Silva",
-        dataDeIncorporação : "2010-09-10",
+        dataDeIncorporacao : "2010-09-10",
         cargo : "inspetor"
     },
     {
         id: uuidv4(),
         nome : "Arnaldo Oliveira",
-        dataDeIncorporação : "2011-01-12",
+        dataDeIncorporacao : "2011-01-12",
         cargo : "inspetor"
     },
     {
         id: uuidv4(),
         nome : "José Augusto",
-        dataDeIncorporação : "2006-03-19",
+        dataDeIncorporacao : "2006-03-19",
         cargo : "delegado"
     }
 ];
@@ -38,8 +38,8 @@ const putA = (id, dados) =>{
     const index = agentes.findIndex((a) => a.id === id);
 
     if(index != -1){
-        agentes(index) = { ...agentes(index), ...data};
-        return agentes(index);
+        agentes[index] = { ...agentes[index], ...dados};
+        return agentes[index];
     };
 
     return null;
@@ -49,8 +49,8 @@ const patchA = (id, dados) =>{
     const index = agentes.findIndex((a) => a.id === id);
 
     if(index != -1){
-        agentes(index) = { ...agentes(index), ...dados};
-        return agentes(index);
+        agentes[index] = { ...agentes[index], ...dados};
+        return agentes[index];
     };
 
     return null;
