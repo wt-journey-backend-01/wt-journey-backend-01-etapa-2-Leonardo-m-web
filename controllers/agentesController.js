@@ -13,6 +13,18 @@ const getAgents = (req, res, next) =>{
     try{
         const agentes = repositories.findA();
 
+        const { cargo } = req.query;
+
+        if (cargo) {
+            agentes = agentes.filter(c => c.cargo === cargo.toLowerCase());
+        }
+
+        const { dataDeIncorporacao } = req.query;
+
+        if (dataDeIncorporacao) {
+            agentes = agentes.filter(c => c.dataDeIncorporacao === dataDeIncorporacao);
+        }
+
         res.status(200).json(agentes);
 
     }catch(error){
@@ -44,7 +56,7 @@ const createAgent = (req, res, next) =>{
         const newData = {
             nome,
             dataDeIncorporacao,
-            cargo : cargo.toLowerCase()
+            cargo :  cargo ? cargo.toLowerCase() : cargo
         };
         const data = agentSchema.parse(newData);
         const newAgent = repositories.createA(data);

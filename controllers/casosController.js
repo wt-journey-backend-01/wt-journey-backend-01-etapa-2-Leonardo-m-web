@@ -14,6 +14,12 @@ const getCase = (req, res, next) =>{
     try{
         const casos = repositories.findC();
 
+        const { status } = req.query;
+
+        if (status) {
+            casos = casos.filter(c => c.status === status.toLowerCase());
+        }
+        
         res.status(200).json(casos);
 
     }catch(error){
@@ -50,7 +56,7 @@ const createCase = (req, res, next) =>{
         const newData = {
             titulo,
             descricao,
-            status: status.toLowerCase(),
+            status:  status ? status.toLowerCase() : status,
             agente_id
         };
         const data = casoSchema.parse(newData);

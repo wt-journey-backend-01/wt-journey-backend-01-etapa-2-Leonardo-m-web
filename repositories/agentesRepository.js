@@ -50,7 +50,8 @@ const patchA = (id, dados) =>{
     const index = agentes.findIndex((a) => a.id === id);
 
     if(index != -1){
-        agentes[index] = { ...agentes[index], ...dados};
+        const { id: _, ...dadosSemId } = dados;
+        agentes[index] = { ...agentes[index], ...dadosSemId};
         return agentes[index];
     };
 
